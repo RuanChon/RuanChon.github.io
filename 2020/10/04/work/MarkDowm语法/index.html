@@ -19,7 +19,7 @@
 
 
 
-<title>【踩坑】git 报错 fatal:unable to access  ‘https://github.com/.......‘:OpenSSL SSL_read:Connection was reset | RuanChon&#39;Blog</title>
+<title>markdown语法 | RuanChon&#39;Blog</title>
 
 
 
@@ -231,7 +231,9 @@
 
   <main class="p-12">
     <!-- toc -->
-
+ <!-- tocbot -->
+<nav class="post-toc toc text-sm w-48 relative top-32 right-0 opacity-70 hidden lg:block" style="position: fixed !important;"></nav>
+ 
 <section class="px-6 max-w-prose mx-auto md:px-0">
   <!-- header -->
   <header class="overflow-hidden pt-6 pb-6 md:pt-12">
@@ -240,16 +242,16 @@
         id="article-title"
         class="text-[2rem] font-bold leading-snug mb-4 md:mb-6 md:text-[2.6rem]"
       >
-        【踩坑】git 报错 fatal:unable to access  ‘https://github.com/.......‘:OpenSSL SSL_read:Connection was reset
+        markdown语法
       </h1>
       <p class="mb-6"></p>
       <div>
         <section class="flex items-center gap-3 text-sm">
-          <time>写于 2021-06-04</time>
+          <time>写于 2020-10-04</time>
           <!-- <span class="text-gray-400">·</span>
-          <span>1 min</span> -->
+          <span>2 min</span> -->
           <span class="text-gray-400">·</span>
-          <span>56 words</span>
+          <span>718 words</span>
         </section>
       </div>
     </div>
@@ -258,9 +260,49 @@
   <article
     class="text-justify post-content mt-10 prose dark:prose-invert post-content"
   >
-    <p><strong>产生原因</strong>：一般是这是因为服务器的 SSL 证书没有经过第三方机构的签署，所以才报错</p>
-<p><strong>解决办法</strong>：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//解除ssl验证后，再次git</span><br><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br></pre></td></tr></table></figure>
+    <h3 id="设置标题"><a href="#设置标题" class="headerlink" title="设置标题"></a>设置标题</h3><p>在需要设置的文本前加#号表示<br>注意#号后面需要间隔空格</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这是一级标题</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 这是二级标题</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## 这是三级标题</span></span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置字体"><a href="#设置字体" class="headerlink" title="设置字体"></a>设置字体</h3><p><strong>加粗</strong><br>文字左右分别用两个<em>号包起来<br><em>斜体</em><br>文字左右分别用一个</em>号包起来<br><strong><em>斜体加粗</em></strong><br>文字左右分别用三个*号包起来<br><del>删除线</del><br>文字左右分别用两个~~号包起来</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line">**这是加粗的文字**</span><br><span class="line">*这是倾斜的文字*`</span><br><span class="line">***这是斜体加粗的文字***</span><br><span class="line">~~这是加删除线的文字~~</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><strong>字体颜色大小</strong><br><strong><font size='2' color="#de0000" face="fantasy">使用 font 标签，并且根据 size、color、face 属性可以设置字体的大小以及字体</font></strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line">**&lt;font size=&#x27;2&#x27; color=&quot;#de0000&quot; face=&quot;fantasy&quot;&gt;使用 font 标签，并且根据 size、color、face 属性可以设置字体的大小以及字体&lt;/font&gt;**</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置引用"><a href="#设置引用" class="headerlink" title="设置引用"></a>设置引用</h3><blockquote>
+<p>在引用的文字前加&gt;即可，引用也可以嵌套。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">这是引用的内容</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;这是引用的内容</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt;这是引用的内容</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置分割线"><a href="#设置分割线" class="headerlink" title="设置分割线"></a>设置分割线</h3><p>三个或者三个以上的 - 或者 * 都可以。</p>
+<hr>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line">---</span><br><span class="line">----</span><br><span class="line">***</span><br><span class="line">*****</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置图片"><a href="#设置图片" class="headerlink" title="设置图片"></a>设置图片</h3><p>格式为 ![图片alt]{图片地址}<br>图片 alt 就是显示在图片下面的文字，相当于对图片内容的解释。<br>图片地址为本地路径或者网络图片地址</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line">![点赞~1.gif](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/57b72fe1cff949e8b3e063120de3c45a~tplv-k3u1fbpfcp-watermark.image)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置链接"><a href="#设置链接" class="headerlink" title="设置链接"></a>设置链接</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">格式为 [超链接名](超链接地址)</span><br><span class="line">示例：</span><br><span class="line">[掘金](https://juejin.cn/)</span><br><span class="line">[百度](http://baidu.com)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置列表"><a href="#设置列表" class="headerlink" title="设置列表"></a>设置列表</h3><p><strong>无序列表</strong><br>语法：无序列表用 - + * 任何一种都可以</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- 列表内容</span><br><span class="line">+ 列表内容</span><br><span class="line">* 列表内容</span><br><span class="line"></span><br><span class="line">注意：- + * 跟内容之间都要有一个空格</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><strong>有序列表</strong><br>语法：数字+加点+空格</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 列表内容</span><br><span class="line">2. 列表内容</span><br><span class="line">3. 列表内容</span><br><span class="line"></span><br><span class="line">注意：序号跟内容之间要有空格</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><strong>列表嵌套</strong><br>语法：上一级和下一级之间敲三个空格即可</p>
+<ul>
+<li>一级无序列表内容<ul>
+<li>二级无序列表内容</li>
+</ul>
+</li>
+</ul>
+<h3 id="设置表格"><a href="#设置表格" class="headerlink" title="设置表格"></a>设置表格</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">语法：</span><br><span class="line">表头|表头|表头</span><br><span class="line">---|:--:|---:</span><br><span class="line">内容|内容|内容</span><br><span class="line">内容|内容|内容</span><br><span class="line"></span><br><span class="line">第二行分割表头和内容。</span><br><span class="line">- 有一个就行，为了对齐，多加了几个</span><br><span class="line">:--- 文字默认居左</span><br><span class="line">:--: 表示文字居中</span><br><span class="line">---: 表示文字居右</span><br><span class="line"></span><br><span class="line">注：原生的语法两边都要用 | 包起来。此处省略</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">姓名|技能|排行</span><br><span class="line">--|:--:|--:</span><br><span class="line">刘备|哭|大哥</span><br><span class="line">关羽|打|二哥</span><br><span class="line">张飞|骂|三弟</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置代码"><a href="#设置代码" class="headerlink" title="设置代码"></a>设置代码</h3><p><strong>单行代码：</strong>代码之间分别用一个反引号包起来</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line"> `代码内容`</span><br></pre></td></tr></table></figure>
+
+<p><strong>代码块：</strong>代码之间分别用三个反引号包起来，且两边的反引号单独占一行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line"> ```js</span><br><span class="line">  代码...</span><br><span class="line">  代码...</span><br><span class="line">  代码...</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
 
   </article>
   <!-- tag -->
@@ -272,7 +314,7 @@
     <div>
       
       <a
-        href="/2021/09/14/life/%E9%95%BF%E6%B2%99%E6%B8%B8/"
+        href="/2021/06/04/work/git%E6%8A%A5%E9%94%99fatal:unable%20to%20access/"
         class="text-sm text-gray-400 hover:text-gray-500 flex justify-center"
       >
         <iconify-icon
@@ -280,17 +322,17 @@
           icon="ri:arrow-left-s-line"
           data-inline="false"
         ></iconify-icon>
-        长沙游
+        【踩坑】git 报错 fatal:unable to access  ‘https://github.com/.......‘:OpenSSL SSL_read:Connection was reset
       </a>
       
     </div>
     <div>
       
       <a
-        href="/2020/10/04/work/MarkDowm%E8%AF%AD%E6%B3%95/"
+        href="/2020/06/04/work/overflow%E5%9C%A8ios%E6%BB%91%E5%8A%A8%E4%B8%8D%E6%B5%81%E7%95%85/"
         class="text-sm text-gray-400 hover:text-gray-500 flex justify-center"
       >
-        markdown语法
+        【踩坑】overflow-y在ios上会有滑动不流畅的情况
         <iconify-icon
           width="20"
           icon="ri:arrow-right-s-line"

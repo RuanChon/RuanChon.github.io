@@ -19,7 +19,7 @@
 
 
 
-<title>【踩坑】git 报错 fatal:unable to access  ‘https://github.com/.......‘:OpenSSL SSL_read:Connection was reset | RuanChon&#39;Blog</title>
+<title>关于无感刷新token | RuanChon&#39;Blog</title>
 
 
 
@@ -231,7 +231,9 @@
 
   <main class="p-12">
     <!-- toc -->
-
+ <!-- tocbot -->
+<nav class="post-toc toc text-sm w-48 relative top-32 right-0 opacity-70 hidden lg:block" style="position: fixed !important;"></nav>
+ 
 <section class="px-6 max-w-prose mx-auto md:px-0">
   <!-- header -->
   <header class="overflow-hidden pt-6 pb-6 md:pt-12">
@@ -240,16 +242,16 @@
         id="article-title"
         class="text-[2rem] font-bold leading-snug mb-4 md:mb-6 md:text-[2.6rem]"
       >
-        【踩坑】git 报错 fatal:unable to access  ‘https://github.com/.......‘:OpenSSL SSL_read:Connection was reset
+        关于无感刷新token
       </h1>
       <p class="mb-6"></p>
       <div>
         <section class="flex items-center gap-3 text-sm">
-          <time>写于 2021-06-04</time>
+          <time>写于 2022-03-04</time>
           <!-- <span class="text-gray-400">·</span>
-          <span>1 min</span> -->
+          <span>2 min</span> -->
           <span class="text-gray-400">·</span>
-          <span>56 words</span>
+          <span>627 words</span>
         </section>
       </div>
     </div>
@@ -258,9 +260,16 @@
   <article
     class="text-justify post-content mt-10 prose dark:prose-invert post-content"
   >
-    <p><strong>产生原因</strong>：一般是这是因为服务器的 SSL 证书没有经过第三方机构的签署，所以才报错</p>
-<p><strong>解决办法</strong>：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//解除ssl验证后，再次git</span><br><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br></pre></td></tr></table></figure>
+    <p>因为业务最近开始做官网需求，所以上掘金找了一下，方法如下：</p>
+<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>后端返回过期时间，前端判断 token 过期时间,去调用刷新 token 接口</p>
+<p><strong>缺点：</strong>需要后端额外提供一个 token 过期时间的字段；使用了本地时间判断，若本地时间被篡改，特别是本地时间比服务器时间慢时，拦截会失败。</p>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>写个定时器，定时刷新 token 接口</p>
+<p><strong>缺点：</strong>浪费资源,消耗性能,不建议采用。</p>
+<h3 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h3><p>在响应拦截器中拦截，判断 token 返回过期后，调用刷新 token 接口</p>
+<h3 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h3><p>防止多次刷新 token，我们可以通过一个变量 isRefreshing 去控制是否在刷新 token 的状态。</p>
+<p>同时发起两个或者两个以上的请求时，当第二个过期的请求进来，token 正在刷新，我们先将这个请求存到一个数组队列中，想办法让这个请求处于等待中，一直等到刷新 token 后再逐个重试清空请求队列。那么如何做到让这个请求处于等待中呢？为了解决这个问题，我们得借助 Promise。将请求存进队列中后，同时返回一个 Promise，让这个 Promise 一直处于 Pending 状态（即不调用 resolve），此时这个请求就会一直等啊等，只要我们不执行 resolve，这个请求就会一直在等待。当刷新请求的接口返回来后，我们再调用 resolve，逐个重试。</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;axios&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 是否正在刷新的标记</span></span><br><span class="line"><span class="keyword">let</span> isRefreshing = <span class="literal">false</span></span><br><span class="line"><span class="comment">//重试队列</span></span><br><span class="line"><span class="keyword">let</span> requests = []</span><br><span class="line">service.<span class="property">interceptors</span>.<span class="property">response</span>.<span class="title function_">use</span>(</span><br><span class="line">  <span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//约定code 409 token 过期</span></span><br><span class="line">    <span class="keyword">if</span> (response.<span class="property">data</span>.<span class="property">code</span> === <span class="number">409</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!isRefreshing) &#123;</span><br><span class="line">        isRefreshing = <span class="literal">true</span></span><br><span class="line">        <span class="comment">//调用刷新token的接口</span></span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">refreshToken</span>(&#123; <span class="attr">refreshToken</span>: <span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&quot;refreshToken&quot;</span>), <span class="attr">token</span>: <span class="title function_">getToken</span>() &#125;)</span><br><span class="line">          .<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> &#123; token &#125; = res.<span class="property">data</span></span><br><span class="line">            <span class="comment">// 替换token</span></span><br><span class="line">            <span class="title function_">setToken</span>(token)</span><br><span class="line">            response.<span class="property">headers</span>.<span class="property">Authorization</span> = <span class="string">`<span class="subst">$&#123;token&#125;</span>`</span></span><br><span class="line">            <span class="comment">// token 刷新后将数组的方法重新执行</span></span><br><span class="line">            requests.<span class="title function_">forEach</span>(<span class="function"><span class="params">cb</span> =&gt;</span> <span class="title function_">cb</span>(token))</span><br><span class="line">            requests = [] <span class="comment">// 重新请求完清空</span></span><br><span class="line">            <span class="keyword">return</span> <span class="title function_">service</span>(response.<span class="property">config</span>)</span><br><span class="line">          &#125;)</span><br><span class="line">          .<span class="title function_">catch</span>(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">//跳到登录页</span></span><br><span class="line">            <span class="title function_">removeToken</span>()</span><br><span class="line">            router.<span class="title function_">push</span>(<span class="string">&quot;/login&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(err)</span><br><span class="line">          &#125;)</span><br><span class="line">          .<span class="title function_">finally</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            isRefreshing = <span class="literal">false</span></span><br><span class="line">          &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 返回未执行 resolve 的 Promise</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="comment">// 用函数形式将 resolve 存入，等待刷新后再执行</span></span><br><span class="line">          requests.<span class="title function_">push</span>(<span class="function"><span class="params">token</span> =&gt;</span> &#123;</span><br><span class="line">            response.<span class="property">headers</span>.<span class="property">Authorization</span> = <span class="string">`<span class="subst">$&#123;token&#125;</span>`</span></span><br><span class="line">            <span class="title function_">resolve</span>(<span class="title function_">service</span>(response.<span class="property">config</span>))</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> response &amp;&amp; response.<span class="property">data</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="title class_">Message</span>.<span class="title function_">error</span>(error.<span class="property">response</span>.<span class="property">data</span>.<span class="property">msg</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error)</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
   </article>
   <!-- tag -->
@@ -272,7 +281,7 @@
     <div>
       
       <a
-        href="/2021/09/14/life/%E9%95%BF%E6%B2%99%E6%B8%B8/"
+        href="/2022/07/04/work/%E5%85%B3%E4%BA%8Easync%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/"
         class="text-sm text-gray-400 hover:text-gray-500 flex justify-center"
       >
         <iconify-icon
@@ -280,17 +289,17 @@
           icon="ri:arrow-left-s-line"
           data-inline="false"
         ></iconify-icon>
-        长沙游
+        async/await、promise和setTimeout的执行顺序
       </a>
       
     </div>
     <div>
       
       <a
-        href="/2020/10/04/work/MarkDowm%E8%AF%AD%E6%B3%95/"
+        href="/2021/09/14/life/%E9%95%BF%E6%B2%99%E6%B8%B8/"
         class="text-sm text-gray-400 hover:text-gray-500 flex justify-center"
       >
-        markdown语法
+        长沙游
         <iconify-icon
           width="20"
           icon="ri:arrow-right-s-line"
