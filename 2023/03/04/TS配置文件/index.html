@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Ruanchon的博客">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Ruanchon的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        tsconfig.json 配置说明 - RuanChon&#39;Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 生活不再风花月，而是碗里酱醋盐 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/joe-ava.jpeg" />
+        </div>
+        <div class="name">
+            <i>RuanChon</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#tsconfig-json"><span class="toc-text">tsconfig.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E"><span class="toc-text">配置说明</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 生活不再风花月，而是碗里酱醋盐 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        tsconfig.json 配置说明
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2023-03-04 18:09:11</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#技术摸索" title="技术摸索">技术摸索</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h3 id="tsconfig-json"><a href="#tsconfig-json" class="headerlink" title="tsconfig.json"></a>tsconfig.json</h3><p>通过 <strong>tsc init</strong> 生成或者脚手架初始化</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;incremental&quot;</span>: <span class="literal">true</span>, <span class="comment">// TS编译器在第一次编译之后会生成一个存储编译信息的文件，第二次编译会在第一次的基础上进行增量编译，可以提高编译的速度</span></span><br><span class="line">  <span class="string">&quot;tsBuildInfoFile&quot;</span>: <span class="string">&quot;./buildFile&quot;</span>, <span class="comment">// 增量编译文件的存储位置</span></span><br><span class="line">  <span class="string">&quot;diagnostics&quot;</span>: <span class="literal">true</span>, <span class="comment">// 打印诊断信息</span></span><br><span class="line">  <span class="string">&quot;target&quot;</span>: <span class="string">&quot;ES5&quot;</span>, <span class="comment">// 目标语言的版本</span></span><br><span class="line">  <span class="string">&quot;module&quot;</span>: <span class="string">&quot;CommonJS&quot;</span>, <span class="comment">// 生成代码的模板标准</span></span><br><span class="line">  <span class="string">&quot;outFile&quot;</span>: <span class="string">&quot;./app.js&quot;</span>, <span class="comment">// 将多个相互依赖的文件生成一个文件，可以用在AMD模块中，即开启时应设置&quot;module&quot;: &quot;AMD&quot;,</span></span><br><span class="line">  <span class="string">&quot;lib&quot;</span>: [<span class="string">&quot;DOM&quot;</span>, <span class="string">&quot;ES2015&quot;</span>, <span class="string">&quot;ScriptHost&quot;</span>, <span class="string">&quot;ES2019.Array&quot;</span>], <span class="comment">// TS需要引用的库，即声明文件，es5 默认引用dom、es5、scripthost,如需要使用es的高级版本特性，通常都需要配置，如es8的数组新特性需要引入&quot;ES2019.Array&quot;,</span></span><br><span class="line">  <span class="string">&quot;allowJS&quot;</span>: <span class="literal">true</span>, <span class="comment">// 允许编译器编译JS，JSX文件</span></span><br><span class="line">  <span class="string">&quot;checkJs&quot;</span>: <span class="literal">true</span>, <span class="comment">// 允许在JS文件中报错，通常与allowJS一起使用</span></span><br><span class="line">  <span class="string">&quot;outDir&quot;</span>: <span class="string">&quot;./dist&quot;</span>, <span class="comment">// 指定输出目录</span></span><br><span class="line">  <span class="string">&quot;rootDir&quot;</span>: <span class="string">&quot;./&quot;</span>, <span class="comment">// 指定输出文件目录(用于输出)，用于控制输出目录结构</span></span><br><span class="line">  <span class="string">&quot;declaration&quot;</span>: <span class="literal">true</span>, <span class="comment">// 生成声明文件，开启后会自动生成声明文件</span></span><br><span class="line">  <span class="string">&quot;declarationDir&quot;</span>: <span class="string">&quot;./file&quot;</span>, <span class="comment">// 指定生成声明文件存放目录</span></span><br><span class="line">  <span class="string">&quot;emitDeclarationOnly&quot;</span>: <span class="literal">true</span>, <span class="comment">// 只生成声明文件，而不会生成js文件</span></span><br><span class="line">  <span class="string">&quot;sourceMap&quot;</span>: <span class="literal">true</span>, <span class="comment">// 生成目标文件的sourceMap文件</span></span><br><span class="line">  <span class="string">&quot;inlineSourceMap&quot;</span>: <span class="literal">true</span>, <span class="comment">// 生成目标文件的inline SourceMap，inline SourceMap会包含在生成的js文件中</span></span><br><span class="line">  <span class="string">&quot;declarationMap&quot;</span>: <span class="literal">true</span>, <span class="comment">// 为声明文件生成sourceMap</span></span><br><span class="line">  <span class="string">&quot;typeRoots&quot;</span>: [], <span class="comment">// 声明文件目录，默认时node_modules/@types</span></span><br><span class="line">  <span class="string">&quot;types&quot;</span>: [], <span class="comment">// 加载的声明文件包</span></span><br><span class="line">  <span class="string">&quot;removeComments&quot;</span>:<span class="literal">true</span>, <span class="comment">// 删除注释</span></span><br><span class="line">  <span class="string">&quot;noEmit&quot;</span>: <span class="literal">true</span>, <span class="comment">// 不输出文件,即编译后不会生成任何js文件</span></span><br><span class="line">  <span class="string">&quot;noEmitOnError&quot;</span>: <span class="literal">true</span>, <span class="comment">// 发送错误时不输出任何文件</span></span><br><span class="line">  <span class="string">&quot;noEmitHelpers&quot;</span>: <span class="literal">true</span>, <span class="comment">// 不生成helper函数，减小体积，需要额外安装，常配合importHelpers一起使用</span></span><br><span class="line">  <span class="string">&quot;importHelpers&quot;</span>: <span class="literal">true</span>, <span class="comment">// 通过tslib引入helper函数，文件必须是模块</span></span><br><span class="line">  <span class="string">&quot;downlevelIteration&quot;</span>: <span class="literal">true</span>, <span class="comment">// 降级遍历器实现，如果目标源是es3/5，那么遍历器会有降级的实现</span></span><br><span class="line">  <span class="string">&quot;strict&quot;</span>: <span class="literal">true</span>, <span class="comment">// 开启所有严格的类型检查</span></span><br><span class="line">  <span class="string">&quot;alwaysStrict&quot;</span>: <span class="literal">true</span>, <span class="comment">// 在代码中注入&#x27;use strict&#x27;</span></span><br><span class="line">  <span class="string">&quot;noImplicitAny&quot;</span>: <span class="literal">true</span>, <span class="comment">// 不允许隐式的any类型</span></span><br><span class="line">  <span class="string">&quot;strictNullChecks&quot;</span>: <span class="literal">true</span>, <span class="comment">// 不允许把null、undefined赋值给其他类型的变量</span></span><br><span class="line">  <span class="string">&quot;strictFunctionTypes&quot;</span>: <span class="literal">true</span>, <span class="comment">// 不允许函数参数双向协变</span></span><br><span class="line">  <span class="string">&quot;strictPropertyInitialization&quot;</span>: <span class="literal">true</span>, <span class="comment">// 类的实例属性必须初始化</span></span><br><span class="line">  <span class="string">&quot;strictBindCallApply&quot;</span>: <span class="literal">true</span>, <span class="comment">// 严格的bind/call/apply检查</span></span><br><span class="line">  <span class="string">&quot;noImplicitThis&quot;</span>: <span class="literal">true</span>, <span class="comment">// 不允许this有隐式的any类型</span></span><br><span class="line">  <span class="string">&quot;noUnusedLocals&quot;</span>: <span class="literal">true</span>, <span class="comment">// 检查只声明、未使用的局部变量(只提示不报错)</span></span><br><span class="line">  <span class="string">&quot;noUnusedParameters&quot;</span>: <span class="literal">true</span>, <span class="comment">// 检查未使用的函数参数(只提示不报错)</span></span><br><span class="line">  <span class="string">&quot;noFallthroughCasesInSwitch&quot;</span>: <span class="literal">true</span>, <span class="comment">// 防止switch语句贯穿(即如果没有break语句后面不会执行)</span></span><br><span class="line">  <span class="string">&quot;noImplicitReturns&quot;</span>: <span class="literal">true</span>, <span class="comment">//每个分支都会有返回值</span></span><br><span class="line">  <span class="string">&quot;esModuleInterop&quot;</span>: <span class="literal">true</span>, <span class="comment">// 允许export=导出，由import from 导入</span></span><br><span class="line">  <span class="string">&quot;allowUmdGlobalAccess&quot;</span>: <span class="literal">true</span>, <span class="comment">// 允许在模块中全局变量的方式访问umd模块</span></span><br><span class="line">  <span class="string">&quot;moduleResolution&quot;</span>: <span class="string">&quot;node&quot;</span>, <span class="comment">// 模块解析策略，ts默认用node的解析策略，即相对的方式导入</span></span><br><span class="line">  <span class="string">&quot;baseUrl&quot;</span>: <span class="string">&quot;./&quot;</span>, <span class="comment">// 解析非相对模块的基地址，默认是当前目录</span></span><br><span class="line">  <span class="string">&quot;paths&quot;</span>: &#123; <span class="comment">// 路径映射，相对于baseUrl</span></span><br><span class="line">    <span class="comment">// 如使用jq时不想使用默认版本，而需要手动指定版本，可进行如下配置</span></span><br><span class="line">    <span class="string">&quot;jquery&quot;</span>: [<span class="string">&quot;node_modules/jquery/dist/jquery.min.js&quot;</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;rootDirs&quot;</span>: [<span class="string">&quot;src&quot;</span>,<span class="string">&quot;out&quot;</span>], <span class="comment">// 将多个目录放在一个虚拟目录下，用于运行时，即编译后引入文件的位置可能发生变化，这也设置可以虚拟src和out在同一个目录下，不用再去改变路径也不会报错</span></span><br><span class="line">  <span class="string">&quot;listEmittedFiles&quot;</span>: <span class="literal">true</span>, <span class="comment">// 打印输出文件</span></span><br><span class="line">  <span class="string">&quot;listFiles&quot;</span>: <span class="literal">true</span><span class="comment">// 打印编译的文件(包括引用的声明文件)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定一个匹配列表（属于自动指定该路径下的所有ts相关文件）</span></span><br><span class="line"><span class="string">&quot;include&quot;</span>: [</span><br><span class="line">   <span class="string">&quot;src/**/*&quot;</span></span><br><span class="line">],</span><br><span class="line"><span class="comment">// 指定一个排除列表（include的反向操作）</span></span><br><span class="line"> <span class="string">&quot;exclude&quot;</span>: [</span><br><span class="line">   <span class="string">&quot;demo.ts&quot;</span></span><br><span class="line">],</span><br><span class="line"><span class="comment">// 指定哪些文件使用该配置（属于手动一个个指定文件）</span></span><br><span class="line"> <span class="string">&quot;files&quot;</span>: [</span><br><span class="line">   <span class="string">&quot;demo.ts&quot;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h3><ol>
+<li><p>include - 指定编译文件默认是编译当前目录下所有的 ts 文件</p>
+</li>
+<li><p>exclude - 指定排除的文件</p>
+</li>
+<li><p>target - 指定编译 js 的版本例如 es5 es6</p>
+</li>
+<li><p>allowJS - 是否允许编译 js 文件</p>
+</li>
+<li><p>removeComments - 是否在编译过程中删除文件中的注释</p>
+</li>
+<li><p>rootDir - 编译文件的目录</p>
+</li>
+<li><p>outDir - 输出的目录</p>
+</li>
+<li><p>sourceMap - 代码源文件</p>
+</li>
+<li><p>strict - 严格模式</p>
+</li>
+<li><p>module - 默认 common.js 可选 es6 模式 amd umd 等</p>
+</li>
+</ol>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/RuanChon">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://raunchon.notion.site/raunchon/Notes-84c2157567434d2583b75fee871d0bee">我的笔记</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="RuanChon/giscus_store"
+    data-repo-id="R_kgDOKI2UOA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOKI2UOM4CYtRS"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+
+</html>

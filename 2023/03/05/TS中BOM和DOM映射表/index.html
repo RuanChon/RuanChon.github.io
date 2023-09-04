@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Ruanchon的博客">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Ruanchon的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        TS中DOM内置映射表 - RuanChon&#39;Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 生活不再风花月，而是碗里酱醋盐 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/joe-ava.jpeg" />
+        </div>
+        <div class="name">
+            <i>RuanChon</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM-%E6%98%A0%E5%B0%84%E8%A1%A8"><span class="toc-text">DOM 映射表</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 生活不再风花月，而是碗里酱醋盐 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        TS中DOM内置映射表
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2023-03-05 19:09:11</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#技术摸索" title="技术摸索">技术摸索</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h3 id="DOM-映射表"><a href="#DOM-映射表" class="headerlink" title="DOM 映射表"></a>DOM 映射表</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">HTMLElementTagNameMap</span> &#123;</span><br><span class="line">  <span class="attr">a</span>: <span class="title class_">HTMLAnchorElement</span></span><br><span class="line">  <span class="attr">abbr</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">address</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">applet</span>: <span class="title class_">HTMLAppletElement</span></span><br><span class="line">  <span class="attr">area</span>: <span class="title class_">HTMLAreaElement</span></span><br><span class="line">  <span class="attr">article</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">aside</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">audio</span>: <span class="title class_">HTMLAudioElement</span></span><br><span class="line">  <span class="attr">b</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">base</span>: <span class="title class_">HTMLBaseElement</span></span><br><span class="line">  <span class="attr">bdi</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">bdo</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">blockquote</span>: <span class="title class_">HTMLQuoteElement</span></span><br><span class="line">  <span class="attr">body</span>: <span class="title class_">HTMLBodyElement</span></span><br><span class="line">  <span class="attr">br</span>: <span class="title class_">HTMLBRElement</span></span><br><span class="line">  <span class="attr">button</span>: <span class="title class_">HTMLButtonElement</span></span><br><span class="line">  <span class="attr">canvas</span>: <span class="title class_">HTMLCanvasElement</span></span><br><span class="line">  <span class="attr">caption</span>: <span class="title class_">HTMLTableCaptionElement</span></span><br><span class="line">  <span class="attr">cite</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">code</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">col</span>: <span class="title class_">HTMLTableColElement</span></span><br><span class="line">  <span class="attr">colgroup</span>: <span class="title class_">HTMLTableColElement</span></span><br><span class="line">  <span class="attr">data</span>: <span class="title class_">HTMLDataElement</span></span><br><span class="line">  <span class="attr">datalist</span>: <span class="title class_">HTMLDataListElement</span></span><br><span class="line">  <span class="attr">dd</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">del</span>: <span class="title class_">HTMLModElement</span></span><br><span class="line">  <span class="attr">details</span>: <span class="title class_">HTMLDetailsElement</span></span><br><span class="line">  <span class="attr">dfn</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">dialog</span>: <span class="title class_">HTMLDialogElement</span></span><br><span class="line">  <span class="attr">dir</span>: <span class="title class_">HTMLDirectoryElement</span></span><br><span class="line">  <span class="attr">div</span>: <span class="title class_">HTMLDivElement</span></span><br><span class="line">  <span class="attr">dl</span>: <span class="title class_">HTMLDListElement</span></span><br><span class="line">  <span class="attr">dt</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">em</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">embed</span>: <span class="title class_">HTMLEmbedElement</span></span><br><span class="line">  <span class="attr">fieldset</span>: <span class="title class_">HTMLFieldSetElement</span></span><br><span class="line">  <span class="attr">figcaption</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">figure</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">font</span>: <span class="title class_">HTMLFontElement</span></span><br><span class="line">  <span class="attr">footer</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">form</span>: <span class="title class_">HTMLFormElement</span></span><br><span class="line">  <span class="attr">frame</span>: <span class="title class_">HTMLFrameElement</span></span><br><span class="line">  <span class="attr">frameset</span>: <span class="title class_">HTMLFrameSetElement</span></span><br><span class="line">  <span class="attr">h1</span>: <span class="title class_">HTMLHeadingElement</span></span><br><span class="line">  <span class="attr">h2</span>: <span class="title class_">HTMLHeadingElement</span></span><br><span class="line">  <span class="attr">h3</span>: <span class="title class_">HTMLHeadingElement</span></span><br><span class="line">  <span class="attr">h4</span>: <span class="title class_">HTMLHeadingElement</span></span><br><span class="line">  <span class="attr">h5</span>: <span class="title class_">HTMLHeadingElement</span></span><br><span class="line">  <span class="attr">h6</span>: <span class="title class_">HTMLHeadingElement</span></span><br><span class="line">  <span class="attr">head</span>: <span class="title class_">HTMLHeadElement</span></span><br><span class="line">  <span class="attr">header</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">hgroup</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">hr</span>: <span class="title class_">HTMLHRElement</span></span><br><span class="line">  <span class="attr">html</span>: <span class="title class_">HTMLHtmlElement</span></span><br><span class="line">  <span class="attr">i</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">iframe</span>: <span class="title class_">HTMLIFrameElement</span></span><br><span class="line">  <span class="attr">img</span>: <span class="title class_">HTMLImageElement</span></span><br><span class="line">  <span class="attr">input</span>: <span class="title class_">HTMLInputElement</span></span><br><span class="line">  <span class="attr">ins</span>: <span class="title class_">HTMLModElement</span></span><br><span class="line">  <span class="attr">kbd</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">label</span>: <span class="title class_">HTMLLabelElement</span></span><br><span class="line">  <span class="attr">legend</span>: <span class="title class_">HTMLLegendElement</span></span><br><span class="line">  <span class="attr">li</span>: <span class="title class_">HTMLLIElement</span></span><br><span class="line">  <span class="attr">link</span>: <span class="title class_">HTMLLinkElement</span></span><br><span class="line">  <span class="attr">main</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">map</span>: <span class="title class_">HTMLMapElement</span></span><br><span class="line">  <span class="attr">mark</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">marquee</span>: <span class="title class_">HTMLMarqueeElement</span></span><br><span class="line">  <span class="attr">menu</span>: <span class="title class_">HTMLMenuElement</span></span><br><span class="line">  <span class="attr">meta</span>: <span class="title class_">HTMLMetaElement</span></span><br><span class="line">  <span class="attr">meter</span>: <span class="title class_">HTMLMeterElement</span></span><br><span class="line">  <span class="attr">nav</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">noscript</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">object</span>: <span class="title class_">HTMLObjectElement</span></span><br><span class="line">  <span class="attr">ol</span>: <span class="title class_">HTMLOListElement</span></span><br><span class="line">  <span class="attr">optgroup</span>: <span class="title class_">HTMLOptGroupElement</span></span><br><span class="line">  <span class="attr">option</span>: <span class="title class_">HTMLOptionElement</span></span><br><span class="line">  <span class="attr">output</span>: <span class="title class_">HTMLOutputElement</span></span><br><span class="line">  <span class="attr">p</span>: <span class="title class_">HTMLParagraphElement</span></span><br><span class="line">  <span class="attr">param</span>: <span class="title class_">HTMLParamElement</span></span><br><span class="line">  <span class="attr">picture</span>: <span class="title class_">HTMLPictureElement</span></span><br><span class="line">  <span class="attr">pre</span>: <span class="title class_">HTMLPreElement</span></span><br><span class="line">  <span class="attr">progress</span>: <span class="title class_">HTMLProgressElement</span></span><br><span class="line">  <span class="attr">q</span>: <span class="title class_">HTMLQuoteElement</span></span><br><span class="line">  <span class="attr">rp</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">rt</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">ruby</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">s</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">samp</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">script</span>: <span class="title class_">HTMLScriptElement</span></span><br><span class="line">  <span class="attr">section</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">select</span>: <span class="title class_">HTMLSelectElement</span></span><br><span class="line">  <span class="attr">slot</span>: <span class="title class_">HTMLSlotElement</span></span><br><span class="line">  <span class="attr">small</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">source</span>: <span class="title class_">HTMLSourceElement</span></span><br><span class="line">  <span class="attr">span</span>: <span class="title class_">HTMLSpanElement</span></span><br><span class="line">  <span class="attr">strong</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">style</span>: <span class="title class_">HTMLStyleElement</span></span><br><span class="line">  <span class="attr">sub</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">summary</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">sup</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">table</span>: <span class="title class_">HTMLTableElement</span></span><br><span class="line">  <span class="attr">tbody</span>: <span class="title class_">HTMLTableSectionElement</span></span><br><span class="line">  <span class="attr">td</span>: <span class="title class_">HTMLTableDataCellElement</span></span><br><span class="line">  <span class="attr">template</span>: <span class="title class_">HTMLTemplateElement</span></span><br><span class="line">  <span class="attr">textarea</span>: <span class="title class_">HTMLTextAreaElement</span></span><br><span class="line">  <span class="attr">tfoot</span>: <span class="title class_">HTMLTableSectionElement</span></span><br><span class="line">  <span class="attr">th</span>: <span class="title class_">HTMLTableHeaderCellElement</span></span><br><span class="line">  <span class="attr">thead</span>: <span class="title class_">HTMLTableSectionElement</span></span><br><span class="line">  <span class="attr">time</span>: <span class="title class_">HTMLTimeElement</span></span><br><span class="line">  <span class="attr">title</span>: <span class="title class_">HTMLTitleElement</span></span><br><span class="line">  <span class="attr">tr</span>: <span class="title class_">HTMLTableRowElement</span></span><br><span class="line">  <span class="attr">track</span>: <span class="title class_">HTMLTrackElement</span></span><br><span class="line">  <span class="attr">u</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">ul</span>: <span class="title class_">HTMLUListElement</span></span><br><span class="line">  <span class="attr">var</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">  <span class="attr">video</span>: <span class="title class_">HTMLVideoElement</span></span><br><span class="line">  <span class="attr">wbr</span>: <span class="title class_">HTMLElement</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/RuanChon">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://raunchon.notion.site/raunchon/Notes-84c2157567434d2583b75fee871d0bee">我的笔记</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="RuanChon/giscus_store"
+    data-repo-id="R_kgDOKI2UOA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOKI2UOM4CYtRS"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+
+</html>

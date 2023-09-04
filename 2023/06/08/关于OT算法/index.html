@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Ruanchon的博客">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Ruanchon的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        初识OT算法 - RuanChon&#39;Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 生活不再风花月，而是碗里酱醋盐 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/joe-ava.jpeg" />
+        </div>
+        <div class="name">
+            <i>RuanChon</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-OT-%E7%AE%97%E6%B3%95"><span class="toc-text">什么是 OT 算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OT-%E7%AE%97%E6%B3%95%E7%9A%84%E6%A0%B8%E5%BF%83%E5%8E%9F%E5%88%99"><span class="toc-text">OT 算法的核心原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OT-%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">OT 算法的实现</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 生活不再风花月，而是碗里酱醋盐 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        初识OT算法
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2023-06-08 21:22:10</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#技术摸索" title="技术摸索">技术摸索</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>最近跟着大佬学习的项目因为涉及到多人协同，所以有了解到一点 OT 算法的概念<br>下面主要是我的一些笔记内容，只是大概的简介，后面会随着学习进度慢慢的更新，maybe…</p>
+<hr>
+<h3 id="什么是-OT-算法"><a href="#什么是-OT-算法" class="headerlink" title="什么是 OT 算法"></a>什么是 OT 算法</h3><p>即是 Operation Transform 的缩写，是一种处理协同编辑的算法。主要作用于多人同时编辑的逻辑处理，不会因为并发修改而导致冲突，很好解决了用户数据丢失，版本维护等问题</p>
+<h3 id="OT-算法的核心原则"><a href="#OT-算法的核心原则" class="headerlink" title="OT 算法的核心原则"></a>OT 算法的核心原则</h3><p>场景：OT 算法中是靠版本号来区分提交版本的，服务端只会保存最新的一个版本号，假设 A 和 B 的初始版本都是 1 ，那么 A 提交一次的版本号就为 2，服务端就会保存版本号为 2 的版本，同时把版本 2 更新给 B ，B 再次更新就会以版本 2 修改更新版本 3 提交，如果两端都同时操作了一个地方提交，那就需要 OT 算法来处理冲突了「其中主要分为 <em>操作冲突</em> 和 <em>版本冲突</em> 」，主要涉及到 OT 算法中的几大原则如下</p>
+<p>操作冲突：指的是同时编辑修改了同一个位置而引发的冲突<br>版本冲突：指的是同一个地方 A 和 B 的版本操作不一样，比如 删除 和 修改</p>
+<ul>
+<li><p><strong>Last Victory 最后胜利原则</strong>，最粗暴的方式也是最后兜底的原则，是 OT 算法最基础的原则，谁后来就听谁的</p>
+<blockquote>
+<p>比如在 Node 单线程的环境下，两端同时更新，因为网速的影响，一定会有一个先后请求顺序，OT 算法会以每次客户端提交的版本号来进行广播更新，比如 A 的这次更改就会在原来 1 的版本加 1，作为版本 2 提交</p>
+</blockquote>
+</li>
+<li><p><strong>Priority 优先级原则</strong>，主要判断版本冲突，不是操作冲突，如果是操作冲突的话，优先级原则就不好使了</p>
+<blockquote>
+<p>比如 A 先是修改，B 是删除，那么就会就直接应用了删除操作，因为删除的优先级比修改更高<br>如果是先删除 后修改的冲突，一般会有两种方案，要么就是返回提示已删除，然后根据修改后续操作打包成一个新的版本发布。要么就是不给提示直接作为不同的版本存在</p>
+</blockquote>
+</li>
+<li><p><strong>Position 位置原则</strong>，假设都是操作冲突的话，就会做追加处理</p>
+<blockquote>
+<p>比如 A 修改为 ‘hello world’ B 修改为 ‘hello banana’ ，那么就会追加为 ‘hello world banana’ 的版本</p>
+</blockquote>
+</li>
+<li><p><strong>Low Cost 最小代价原则</strong>，涉及到一个版本有 n 个操作的时候，会把其中没有冲突的地方先更新，然后把有冲突的地方按照客户端的需求更新成不同版本，看采用谁的，类似 git meger ，其中也触及到 撤销 和 回退</p>
+</li>
+</ul>
+<h3 id="OT-算法的实现"><a href="#OT-算法的实现" class="headerlink" title="OT 算法的实现"></a>OT 算法的实现</h3><p>其实关于 OT 算法的实现说起来比较复杂，规定需要有一套完整的版本控制机制和操作描述符来作为基架</p>
+<p>设计的时候一定要有版本的概念，和操作描述符（也就是 crud 操作），其中除了创建、删除，OT 不需要更新操作，因为用 delete + create 比 update 在后续的操作和版本回退中更简单方便「就是和操作对象的属性有关」，如果追加了一个 update 操作，那么服务端需要时时刻刻去验证这个单元格是不是存在的，如果将一个 update 操作拆分成了 delete + create 那么就不需要再去关心单元格存不存在了</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/RuanChon">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://raunchon.notion.site/raunchon/Notes-84c2157567434d2583b75fee871d0bee">我的笔记</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="RuanChon/giscus_store"
+    data-repo-id="R_kgDOKI2UOA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOKI2UOM4CYtRS"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+
+</html>

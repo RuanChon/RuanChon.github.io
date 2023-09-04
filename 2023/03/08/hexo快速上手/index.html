@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Ruanchon的博客">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Ruanchon的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Hexo博客框架快速上手 - RuanChon&#39;Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 生活不再风花月，而是碗里酱醋盐 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/joe-ava.jpeg" />
+        </div>
+        <div class="name">
+            <i>RuanChon</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA-hexo"><span class="toc-text">搭建 hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2"><span class="toc-text">创建博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E8%A7%88%E5%8D%9A%E5%AE%A2"><span class="toc-text">预览博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E7%94%9F%E6%88%90"><span class="toc-text">编译生成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 生活不再风花月，而是碗里酱醋盐 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Hexo博客框架快速上手
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2023-03-08 16:09:11</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#技术摸索" title="技术摸索">技术摸索</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Hexo 是一个快速、简洁且高效的博客框架，支持 GitHub Flavored Markdown 的所有功能，而且选择 Hexo 也是因为目前它的插件和社区都比较成熟了，有问题都好解决。<br>看了文档简单搭建了一下，确实很方便，下面直接概括一下步骤。<br><br/></p>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>首先需要确定本地环境安装了 node 和 git，没有就去官网下载。<br>然后就可以安装 hexo 了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="搭建-hexo"><a href="#搭建-hexo" class="headerlink" title="搭建 hexo"></a>搭建 hexo</h3><p>新建一个你的 Blog 文件夹并在终端打开（win 系统可以直接在文件夹右键 gitbash 打开）<br>使用 <strong>hexo init</strong> 指令初始化，<strong>init</strong> 可简写 <strong>i</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo i</span><br></pre></td></tr></table></figure>
+
+<p>初始化完成后，文件夹结构如下<br><img src="/../../images/hexo-dir.png"></p>
+<p>现在我们只需要关心 <strong>source</strong> 文件夹和 <strong>_config.yml</strong> 文件，后续我们的博客文件都是放在 <strong>source</strong> 里面的 <strong>_posts</strong> 文件夹下，<strong>_config.yml</strong> 是我们的配置文件。<br>接下来就可以创建我们的第一个博客了<br><br/></p>
+<h3 id="创建博客"><a href="#创建博客" class="headerlink" title="创建博客"></a>创建博客</h3><p>可以通过 <strong>hexo new “我的第一个博客”</strong> 指令创建，<strong>new</strong> 可简写 <strong>n</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;我的第一个博客&quot;</span><br></pre></td></tr></table></figure>
+
+<p>也可以直接去 _posts 文件夹下创建 md 文件，但是第一次接触不推荐。<br><br/></p>
+<h3 id="预览博客"><a href="#预览博客" class="headerlink" title="预览博客"></a>预览博客</h3><p>通过 <strong>hexo server</strong> 指令生成预览，<strong>server</strong> 可简写 <strong>s</strong><br>此时我们浏览器访问本地 localhost:4000 端口就可以测试预览了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="编译生成"><a href="#编译生成" class="headerlink" title="编译生成"></a>编译生成</h3><p>这个时候我们需要把博客挂载到网上，就需要先将博客编译一下。<br>通过 <strong>hexo generate</strong> 指令生成预览，<strong>generate</strong> 可简写 <strong>g</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<br/>
+### 部署上传
+
+<p>编译完后会生成 <strong>public</strong> 文件夹，这里面就是我们的博客网站了，可以挂载到你自己的站点。<br>如果没有，这里我以 github 为例，首先创建一个 github 项目，项目名必须与帐户名一致，且后缀固定为 .github.io<br><img src="/../../images/hexo-github.png"></p>
+<p>在 Blog 文件夹下安装插件 <strong>hexo-deployer-git</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+
+<p>修改 <strong>_config.yml</strong> 文件，设置 type &#x2F; repo &#x2F; branch ，repo 值为刚才 github 创建的项目地址<br><img src="/../../images/hexo-config.png"></p>
+<p>修改完保存后，通过 <strong>hexo deploy</strong> 指令部署上传，<strong>deploy</strong> 可简写 <strong>d</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>等下上传完毕后就可以通过刚才的项目 io 地址直接访问了，一个简单的博客就搭建完毕啦。<br><br/></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>再介绍一个 <strong>hexo clean</strong> 指令，会删除 public 文件夹，帮助清除缓存</p>
+<p>注意后续所有的更新操作都是重复以上的编译和部署两个指令，hexo 会帮助我们把编译后的 public 文件夹上传。</p>
+<p>对于主题样式替换可以浏览一下官网里的主题，跟着主题说明文档 clone 替换就可以了，非常简单。</p>
+<p>更多详细配置可查看官网 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">https://hexo.io/zh-cn/</a></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/RuanChon">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://raunchon.notion.site/raunchon/Notes-84c2157567434d2583b75fee871d0bee">我的笔记</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="RuanChon/giscus_store"
+    data-repo-id="R_kgDOKI2UOA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOKI2UOM4CYtRS"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Ruanchon的博客">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Ruanchon的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        React的渲染原理 - RuanChon&#39;Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 生活不再风花月，而是碗里酱醋盐 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/joe-ava.jpeg" />
+        </div>
+        <div class="name">
+            <i>RuanChon</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%A6%96%E5%85%88%E5%BE%97%E7%9F%A5%E9%81%93%E5%95%A5%E6%98%AF%E6%B8%B2%E6%9F%93%E5%B8%A7"><span class="toc-text">1.首先得知道啥是渲染帧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-React-%E6%98%AF%E5%92%8B%E5%A4%84%E7%90%86%E6%B8%B2%E6%9F%93%E7%9A%84"><span class="toc-text">2.React 是咋处理渲染的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-useTransition-%E7%9A%84%E5%A6%99%E7%94%A8"><span class="toc-text">3.useTransition 的妙用</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 生活不再风花月，而是碗里酱醋盐 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        React的渲染原理
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2023-04-22 14:32:12</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#技术摸索" title="技术摸索">技术摸索</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>最近跟着 B 站 up 主付金权学习到的一点笔记，写的比较零散，只做辅助理解。</p>
+<hr>
+<h3 id="1-首先得知道啥是渲染帧"><a href="#1-首先得知道啥是渲染帧" class="headerlink" title="1.首先得知道啥是渲染帧"></a>1.首先得知道啥是渲染帧</h3><ul>
+<li>帧：一帧画面，类似于游戏掉帧，卡</li>
+<li>帧率：切换画面的速度，浏览器一般也就 1 秒 60 帧，一帧执行 16 毫秒</li>
+<li>掉帧：由于前一帧的效率问题，把后面的帧挤占掉了</li>
+</ul>
+<p>比如一些交互事件，由于前一帧的占用时间，导致 input 框输入的内容无法及时触发<br>如果想稳定浏览器的帧率，就要确保一帧做的事情不要太多<br>同样多的代码量，在 vue 里首屏渲染可能会掉帧，但是 react 就不会，因为 react 有调度机制，优先级概念，而且 react 的渲染是可以中断的（concurrency）</p>
+<hr>
+<h3 id="2-React-是咋处理渲染的"><a href="#2-React-是咋处理渲染的" class="headerlink" title="2.React 是咋处理渲染的"></a>2.React 是咋处理渲染的</h3><p>大致分为两个模块：</p>
+<ul>
+<li>fiber 架构：里面主要是虚拟 DOM 和 Diff 算法</li>
+<li>concurrency（并发性，可中断渲染）：react18 以前叫 concurrency mode，18 以后更名为 concurrency</li>
+</ul>
+<p>首先要知道树形结构和数组还有对象的性质都是一样的，都是用来表示数据关系的性质</p>
+<p><strong>初次渲染一个组件到页面的步骤：</strong></p>
+<ul>
+<li>拿到 React.createElement 返回的节点，也就是一个对象，类似于生成的 vdom<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> rootElement = <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>, &#123; <span class="attr">className</span>: <span class="string">&#x27;wrapper&#x27;</span> &#125;,</span><br><span class="line"><span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;span&quot;</span>, &#123;&#125;. <span class="string">&quot;hello,text&quot;</span>),</span><br><span class="line"><span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;myCount&quot;</span>, &#123; <span class="attr">type</span>: <span class="string">&#x27;component&#x27;</span> &#125; ))</span><br></pre></td></tr></table></figure></li>
+<li>通过 render 方法进行渲染</li>
+<li>主要分为<ul>
+<li>如果是组件节点，则会在执行渲染的过程中保存对应的 hooks 以及触发的对应 hooks （比如 useState 立即触发，useEffect 要等 dom 挂载完触发）</li>
+<li>如果是 react 元素节点（div，span），不会生成真实 dom 而是生成一个表述对象【这个描述对象描述的需要创建真实 dom 的一些信息，以及这个对象要做的操作：create】这个描述对象就叫做 fiber</li>
+</ul>
+</li>
+<li>通过这个描述对象的清单，将内部依次编译为真实 dom，然后插入父元素的子节点，appendChild</li>
+<li>等整个流程结束后，得到一个真实的 dom 树，最后将其插入到对应的 root 元素下面</li>
+<li>触发对应的生命周期事件</li>
+</ul>
+<p><strong>更新组件渲染步骤：</strong></p>
+<ul>
+<li>生成一个新的节点，但不会全部重新生成，只重新生成相关组件和有依赖的元素</li>
+<li>直接进入 diff 比较，然后也会生成一个描述对象的清单【里面也都是 fiber 节点，每个节点的状态可以是 create &#x2F; delete &#x2F; update 中的一个】</li>
+<li>将差异点应用到真实 dom ，触发对应的生命周期事件</li>
+</ul>
+<p>当代码量足够多时，那么去执行 React.createElement 和 Render 这两个方法的时间就越长，但是浏览器一帧就 16 毫秒，如果超过了，就掉帧，用户交互失败</p>
+<p>其中最耗时的就是 我们的代码 和 react 的逻辑代码，反而创建 dom 是最快的</p>
+<p>所以 react 就帮我们分成了两个阶段</p>
+<ul>
+<li>render 阶段，执行我们和 react 的逻辑代码，并生成一个描述对象以便告诉下一阶段的执行【fiber 清单，类似表格，指定在哪里插入 dom 和删除 dom，记录了最终要展示给用户的 dom 树是什么样的】</li>
+<li>commit 阶段，将虚拟 dom 映射到真实 dom</li>
+</ul>
+<p>既然已经将整个渲染流程分为了两个阶段，那我们如果需要更好的性能，避免丢帧，我们就要对 render 阶段做点文章，这个时候就需要 concurrency 出场了</p>
+<p><strong>concurrency（并发性，可中断渲染）</strong></p>
+<p>首先掉帧在首次渲染一般是无感知的，因为此时页面不可交互，而在更新渲染时，因为可以在原页面上交互，所以用户能感知到，这个时候先介绍两个方法</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一帧内必定要执行的函数</span></span><br><span class="line"><span class="title function_">requestAnimationFrame</span>(fn) <span class="comment">// 这个fn会在浏览器的每一帧重排前都会执行</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 每一帧还有剩余时间的时候执行</span></span><br><span class="line"><span class="title function_">requestIdleCallback</span>(fn) <span class="comment">// 这个fn会在每一帧还有多余时间执行</span></span><br></pre></td></tr></table></figure>
+
+<p>concurrency 可中断渲染的实现</p>
+<p>核心就是递归，每次的渲染函数渲染前都会通过两层判断，是否还有任务需要执行 &#x2F; 是否还有额外的执行时间，通过函数里 deadline 参数的 timeRemaining 函数判断剩余执行时间，不够的话就通过 requestIdleCallback 推向下一帧执行，这样无论组件写的有多大都可以拆分到每一帧避免掉帧。</p>
+<p>后续通过前面两层判断后开始真正的节点渲染，如果 type 是 function 就代表是组件，其它类型则为 dom 真实元素直接渲染，但是此时还不会马上挂载到页面上，此时还在 render 阶段</p>
+<p><em>Tips：concurrency 拆分的最小单元是组件和 react 元素</em></p>
+<hr>
+<h3 id="3-useTransition-的妙用"><a href="#3-useTransition-的妙用" class="headerlink" title="3.useTransition 的妙用"></a>3.useTransition 的妙用</h3><p>首先要知道 fiber 优先级：react 除了会把任务拆分为很多块以外【可中断渲染】，还会做一个事情，就是将任务分成不同的优先级执行</p>
+<p>比如在一个切换 tab 的场景下，某一个 tab 组件的渲染超过了 16ms 造成掉帧导致切换 tab 不流畅，这个时候我们希望切换 tab 的这个行为优先级 高于页面的渲染优先级，中断当前切换 tab 的渲染工作，这个时候 useTransition 就可以做到</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pending 状态，代表当前是否有 transition 任务在执行</span></span><br><span class="line"><span class="comment">// starTransition 代表开启一个 transition 任务</span></span><br><span class="line"><span class="keyword">const</span> [pending, starTransition] = <span class="title function_">useTranstision</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 starTransition 函数返回需要设置的操作，使其变成一个 transition 工作</span></span><br><span class="line"><span class="comment">// transition 工作是低优先级的，不会阻塞用户交互，也不会让页面失去响应</span></span><br><span class="line"><span class="comment">// pending 状态可以拿来判断页面状态 loading</span></span><br></pre></td></tr></table></figure>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/RuanChon">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://raunchon.notion.site/raunchon/Notes-84c2157567434d2583b75fee871d0bee">我的笔记</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="RuanChon/giscus_store"
+    data-repo-id="R_kgDOKI2UOA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOKI2UOM4CYtRS"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+
+</html>

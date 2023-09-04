@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Ruanchon的博客">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Ruanchon的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        日常中的一些踩坑（持续更新） - RuanChon&#39;Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 生活不再风花月，而是碗里酱醋盐 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/joe-ava.jpeg" />
+        </div>
+        <div class="name">
+            <i>RuanChon</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E8%B6%85%E5%87%BA%E6%98%BE%E7%A4%BA%E7%9C%81%E7%95%A5%E5%8F%B7"><span class="toc-text">文本超出显示省略号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#textarea-%E5%A4%9A%E8%A1%8C%E6%96%87%E6%9C%AC%E7%A6%81%E6%AD%A2%E6%8B%89%E4%BC%B8"><span class="toc-text">textarea 多行文本禁止拉伸</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#element-%E7%BB%84%E4%BB%B6%E7%BB%99-item-%E8%AE%BE%E7%BD%AE%E5%AE%BD%E5%BA%A6"><span class="toc-text">element 组件给 item 设置宽度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E5%AD%97%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E5%AD%97%E8%B7%9D"><span class="toc-text">两个字需要设置字距</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#params-%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82%EF%BC%8C%E5%88%B7%E6%96%B0%E5%90%8E%EF%BC%8C%E6%95%B0%E6%8D%AE%E4%BC%9A%E6%B6%88%E5%A4%B1"><span class="toc-text">params 路由传参，刷新后，数据会消失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue3-%E4%B8%AD%E7%9A%84%E7%9B%91%E5%90%AC%E8%B7%AF%E7%94%B1"><span class="toc-text">vue3 中的监听路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#element-%E7%BB%84%E4%BB%B6%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%B7%E5%BC%8F%E6%9C%89%E6%97%B6%E5%80%99%E4%B8%8D%E7%94%9F%E6%95%88"><span class="toc-text">element 组件自定义样式有时候不生效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%83%8F%E7%B4%A0-1px-%E9%97%AE%E9%A2%98"><span class="toc-text">像素 1px 问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css-%E5%8A%A8%E7%94%BB%E9%A1%B5%E9%97%AA%E7%99%BD%E5%8D%A1%E9%A1%BF"><span class="toc-text">css 动画页闪白卡顿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#h5-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%9C%A8-ios-%E4%B8%8A-overflow-y-%E6%BB%91%E5%8A%A8%E4%B8%8D%E6%B5%81%E7%95%85"><span class="toc-text">h5 移动端在 ios 上 overflow-y 滑动不流畅</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ios-%E9%94%AE%E7%9B%98%E6%94%B6%E8%B5%B7%E6%97%B6%E9%A1%B5%E9%9D%A2%E6%B2%A1%E7%94%A8%E5%9B%9E%E8%90%BD%EF%BC%8C%E5%BA%95%E9%83%A8%E4%BC%9A%E7%95%99%E7%99%BD"><span class="toc-text">ios 键盘收起时页面没用回落，底部会留白</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ios-%E4%B8%8B-fixed-%E5%A4%B1%E6%95%88"><span class="toc-text">ios 下 fixed 失效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA-Excel-%E6%B5%81%E6%96%87%E4%BB%B6"><span class="toc-text">导出 Excel 流文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%87%8C%E9%9D%A2%E6%9C%89%E6%B8%B8%E6%88%8F%E9%93%BE%E6%8E%A5%E6%98%AF%E6%97%A0%E6%B3%95%E5%AE%A1%E6%A0%B8%E9%80%9A%E8%BF%87"><span class="toc-text">小程序里面有游戏链接是无法审核通过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA-promise-%E8%AF%B7%E6%B1%82%E5%8A%A0%E8%BD%BD"><span class="toc-text">多个 promise 请求加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-ts-%E5%A4%B1%E8%B4%A5"><span class="toc-text">安装 ts 失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E6%8E%92%E5%BA%8F"><span class="toc-text">数组去重排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E9%97%AE%E5%8F%B7%E8%AF%AD%E6%B3%95"><span class="toc-text">?? 双问号语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-ElementePlus-%E9%BC%A0%E6%A0%87%E6%82%AC%E6%B5%AE-TS-%E6%B2%A1%E6%8F%90%E7%A4%BA"><span class="toc-text">使用 ElementePlus 鼠标悬浮 TS 没提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%83%8F%E7%B4%A0%E8%BD%AC%E6%8D%A2-vh%E3%80%81vw"><span class="toc-text">像素转换 vh、vw</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%8A-proxy-%E5%AF%B9%E8%B1%A1%E8%BD%AC%E6%8D%A2%E6%88%90%E5%8E%9F%E5%A7%8B%E5%AF%B9%E8%B1%A1"><span class="toc-text">把 proxy 对象转换成原始对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E6%8B%BC%E6%8E%A5%E4%BC%A0%E5%80%BC%E5%90%8E%E9%9D%A2%E7%9A%84%E5%8F%82%E6%95%B0%E4%B8%A2%E5%A4%B1"><span class="toc-text">路由拼接传值后面的参数丢失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="toc-text">小程序实现组件通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E6%89%8B%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%81%87%E5%88%B0%E6%8F%92%E6%A7%BD%E6%B8%B2%E6%9F%93%E5%86%B2%E7%AA%81%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">快手小程序遇到插槽渲染冲突的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VS-Code-%E5%AE%89%E8%A3%85%E5%AE%8C%E4%BE%9D%E8%B5%96%EF%BC%8C%E4%BB%A3%E7%A0%81%E8%BF%98%E6%98%AF%E6%8A%A5%E7%BA%A2"><span class="toc-text">VS Code 安装完依赖，代码还是报红</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E6%89%8B%E5%B0%8F%E7%A8%8B%E5%BA%8F-css-%E8%83%8C%E6%99%AF%E5%9B%BE"><span class="toc-text">快手小程序 css 背景图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E9%85%8D%E7%BD%AE%E5%AE%8C%E8%B7%AF%E5%BE%84%E5%88%AB%E5%90%8D%E5%90%8E-ts-%E6%8A%A5%E7%BA%A2"><span class="toc-text">如果配置完路径别名后 ts 报红</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git-%E6%8A%A5%E9%94%99-OpenSSL-SSL-read"><span class="toc-text">Git 报错 OpenSSL SSL_read</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vite-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%97%B6%E7%BA%A2%E7%BA%BF-vue-%E6%9C%AA%E5%A3%B0%E6%98%8E"><span class="toc-text">vite 初始化时红线 vue 未声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8-http-server-%E6%9C%8D%E5%8A%A1-hs-%E6%8C%87%E4%BB%A4%E6%8A%A5%E9%94%99"><span class="toc-text">本地使用 http-server 服务 hs 指令报错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-mantine-UI-%E5%BA%93%E7%9A%84%E5%9D%91"><span class="toc-text">使用 mantine UI 库的坑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E7%B3%BB%E7%BB%9F%E9%A2%9C%E8%89%B2%E4%B8%BB%E9%A2%98"><span class="toc-text">判断当前系统颜色主题</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 生活不再风花月，而是碗里酱醋盐 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        日常中的一些踩坑（持续更新）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2023-07-18 15:18:12</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#技术摸索" title="技术摸索">技术摸索</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <blockquote>
+<p>主要记录一下平常开发中遇到的问题和一些我没学到的知识点，查漏补缺，notion 同步更新</p>
+</blockquote>
+<hr>
+<h3 id="文本超出显示省略号"><a href="#文本超出显示省略号" class="headerlink" title="文本超出显示省略号"></a>文本超出显示省略号</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 单行</span><br><span class="line"><span class="attribute">overflow</span>: hidden;</span><br><span class="line"><span class="attribute">white-space</span>: nowrap;</span><br><span class="line"><span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line"></span><br><span class="line">// 多行</span><br><span class="line"><span class="attribute">overflow</span>: hidden;</span><br><span class="line"><span class="attribute">display</span>: -webkit-box;</span><br><span class="line">-webkit-box-orient: vertical;</span><br><span class="line">-webkit-line-clamp: <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="textarea-多行文本禁止拉伸"><a href="#textarea-多行文本禁止拉伸" class="headerlink" title="textarea 多行文本禁止拉伸"></a>textarea 多行文本禁止拉伸</h3><ul>
+<li>设置样式 resize: none；</li>
+</ul>
+<hr>
+<h3 id="element-组件给-item-设置宽度"><a href="#element-组件给-item-设置宽度" class="headerlink" title="element 组件给 item 设置宽度"></a>element 组件给 item 设置宽度</h3><p>element from 组件 给 item 设置宽度 label-width&#x3D;”auto”时 会和 表单验证冲突报错 ElementPlusError: [Form] unexpected width</p>
+<ul>
+<li>注释 label-width&#x3D;”auto”</li>
+</ul>
+<hr>
+<h3 id="两个字需要设置字距"><a href="#两个字需要设置字距" class="headerlink" title="两个字需要设置字距"></a>两个字需要设置字距</h3><p>只有两个字需要设置字距时，直接设置 letter-spacing 后文字不能居中</p>
+<ul>
+<li>添加缩进 text-indent 可抵消解决</li>
+</ul>
+<hr>
+<h3 id="params-路由传参，刷新后，数据会消失"><a href="#params-路由传参，刷新后，数据会消失" class="headerlink" title="params 路由传参，刷新后，数据会消失"></a>params 路由传参，刷新后，数据会消失</h3><ul>
+<li>使用 query 方式不会消失</li>
+</ul>
+<hr>
+<h3 id="vue3-中的监听路由"><a href="#vue3-中的监听路由" class="headerlink" title="vue3 中的监听路由"></a>vue3 中的监听路由</h3><ul>
+<li>使用 vue-router 里的 onBeforeRouteUpdate</li>
+</ul>
+<hr>
+<h3 id="element-组件自定义样式有时候不生效"><a href="#element-组件自定义样式有时候不生效" class="headerlink" title="element 组件自定义样式有时候不生效"></a>element 组件自定义样式有时候不生效</h3><ul>
+<li>原因是我把样式标签的 scoped 写成了 scope</li>
+</ul>
+<hr>
+<h3 id="像素-1px-问题"><a href="#像素-1px-问题" class="headerlink" title="像素 1px 问题"></a>像素 1px 问题</h3><ul>
+<li>通过 :before 或者 :after 选择器设置高度 1px 同时缩放 0.5 倍实现</li>
+</ul>
+<hr>
+<h3 id="css-动画页闪白卡顿"><a href="#css-动画页闪白卡顿" class="headerlink" title="css 动画页闪白卡顿"></a>css 动画页闪白卡顿</h3><ul>
+<li>尽可能地使用合成属性 transform 和 opacity 来设计 CSS3 动画，不使用 position 的 left 和 top 来定位</li>
+<li>开启硬件加速</li>
+</ul>
+<hr>
+<h3 id="h5-移动端在-ios-上-overflow-y-滑动不流畅"><a href="#h5-移动端在-ios-上-overflow-y-滑动不流畅" class="headerlink" title="h5 移动端在 ios 上 overflow-y 滑动不流畅"></a>h5 移动端在 ios 上 overflow-y 滑动不流畅</h3><ul>
+<li>给容器加上 webkit-overflow-scrolling: touch;touch-action: pan-y;</li>
+</ul>
+<hr>
+<h3 id="ios-键盘收起时页面没用回落，底部会留白"><a href="#ios-键盘收起时页面没用回落，底部会留白" class="headerlink" title="ios 键盘收起时页面没用回落，底部会留白"></a>ios 键盘收起时页面没用回落，底部会留白</h3><ul>
+<li>通过监听键盘回落时间滚动到原来的位置</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;focusout&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">scrollTo</span>(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//input输入框弹起软键盘的解决方案。</span></span><br><span class="line"><span class="keyword">var</span> bfscrolltop = <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">scrollTop</span></span><br><span class="line">$(<span class="string">&quot;input&quot;</span>)</span><br><span class="line">  .<span class="title function_">focus</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">scrollTop</span> = <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">scrollHeight</span></span><br><span class="line">    <span class="comment">//console.log(document.body.scrollTop);</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">blur</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">scrollTop</span> = bfscrolltop</span><br><span class="line">    <span class="comment">//console.log(document.body.scrollTop);</span></span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="ios-下-fixed-失效"><a href="#ios-下-fixed-失效" class="headerlink" title="ios 下 fixed 失效"></a>ios 下 fixed 失效</h3><p>软键盘唤起后，页面的 fixed 元素将失效，变成了 absolute，所以当页面超过一屏且滚动时，失效的 fixed 元素就会跟随滚动了。不仅限于 type&#x3D;text 的输入框，凡是软键盘（比如时间日期选择、select 选择等等）被唤起，都会遇到同样地问题。</p>
+<ul>
+<li>不让页面滚动，而是让主体部分自己滚动,主体部分高度设为 100%，overflow: scroll</li>
+</ul>
+<hr>
+<h3 id="导出-Excel-流文件"><a href="#导出-Excel-流文件" class="headerlink" title="导出 Excel 流文件"></a>导出 Excel 流文件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// axios.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">downPostRequest</span> = (<span class="params">url, params,responseType</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">axios</span>(&#123;</span><br><span class="line">        <span class="attr">method</span>: <span class="string">&#x27;post&#x27;</span>,</span><br><span class="line">        <span class="attr">url</span>: <span class="string">`<span class="subst">$&#123;base&#125;</span><span class="subst">$&#123;url&#125;</span>`</span>,</span><br><span class="line">        <span class="attr">data</span>: params,</span><br><span class="line">        <span class="attr">transformRequest</span>: [<span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> ret = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> it <span class="keyword">in</span> data) &#123;</span><br><span class="line">                ret += <span class="built_in">encodeURIComponent</span>(it) + <span class="string">&#x27;=&#x27;</span> + <span class="built_in">encodeURIComponent</span>(data[it]) + <span class="string">&#x27;&amp;&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;],</span><br><span class="line">        <span class="attr">responseType</span>: responseType,</span><br><span class="line">        <span class="attr">headers</span>: <span class="title function_">getAjaxHeaders</span>(<span class="literal">null</span>,<span class="literal">false</span>)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// demo.vue</span></span><br><span class="line"><span class="comment">// 导出按钮</span></span><br><span class="line"><span class="title function_">getOverExcel</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> downUrl = <span class="string">`/statistics/overseasUnitsStatisticsExcel?departmentId=<span class="subst">$&#123;<span class="variable language_">this</span>.ptId&#125;</span>&amp;current=<span class="subst">$&#123;<span class="variable language_">this</span>.qureyOveData.current&#125;</span>&amp;size=<span class="subst">$&#123;<span class="variable language_">this</span>.qureyOveData.size&#125;</span>&amp;startTime=<span class="subst">$&#123;<span class="variable language_">this</span>.startTime&#125;</span>&amp;endTime=<span class="subst">$&#123;<span class="variable language_">this</span>.endTime&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line">      <span class="title function_">downPostRequest</span>(downUrl, <span class="literal">null</span>,<span class="string">&#x27;blob&#x27;</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> content = res;</span><br><span class="line">        <span class="keyword">const</span> blob = <span class="keyword">new</span> <span class="title class_">Blob</span>([content]);</span><br><span class="line">        <span class="keyword">const</span> fileName = <span class="string">&quot;导出信息.xlsx&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;download&quot;</span> <span class="keyword">in</span> <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;a&quot;</span>)) &#123;</span><br><span class="line">          <span class="comment">// 非IE下载</span></span><br><span class="line">          <span class="keyword">const</span> elink = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">          elink.<span class="property">download</span> = fileName;</span><br><span class="line">          elink.<span class="property">style</span>.<span class="property">display</span> = <span class="string">&quot;none&quot;</span>;</span><br><span class="line">          elink.<span class="property">href</span> = <span class="variable constant_">URL</span>.<span class="title function_">createObjectURL</span>(blob);</span><br><span class="line">          <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(elink);</span><br><span class="line">          elink.<span class="title function_">click</span>();</span><br><span class="line">          <span class="variable constant_">URL</span>.<span class="title function_">revokeObjectURL</span>(elink.<span class="property">href</span>); <span class="comment">// 释放URL 对象</span></span><br><span class="line">          <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">removeChild</span>(elink);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">// IE10+下载</span></span><br><span class="line">          navigator.<span class="title function_">msSaveBlob</span>(blob, fileName);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="小程序里面有游戏链接是无法审核通过"><a href="#小程序里面有游戏链接是无法审核通过" class="headerlink" title="小程序里面有游戏链接是无法审核通过"></a>小程序里面有游戏链接是无法审核通过</h3><ul>
+<li>通过替换云开发链接地址，审核通过后再换回来，要选择环境上传部署</li>
+</ul>
+<hr>
+<h3 id="多个-promise-请求加载"><a href="#多个-promise-请求加载" class="headerlink" title="多个 promise 请求加载"></a>多个 promise 请求加载</h3><ul>
+<li>这样写效率更高，也更合理</li>
+<li>不能在 foreach 、map 之类的循环写异步，他们不会等待异步执行，最好还是用 for</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> promiseA = <span class="title function_">fetch</span>(<span class="string">&quot;http://.../...&quot;</span>)</span><br><span class="line">  <span class="keyword">const</span> promiseB = <span class="title function_">fetch</span>(<span class="string">&quot;http://.../...&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> [a, b] = <span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">all</span>([promiseA, promiseB])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="安装-ts-失败"><a href="#安装-ts-失败" class="headerlink" title="安装 ts 失败"></a>安装 ts 失败</h3><ul>
+<li><p>检查本地 npm 文件夹是否有 tsc 依赖，删除所有 tsc 相关文件，重新安装 ts</p>
+</li>
+<li><p>本地 npm 文件夹地址：C:\Users\用户\AppData\Roaming\npm</p>
+</li>
+</ul>
+<hr>
+<h3 id="数组去重排序"><a href="#数组去重排序" class="headerlink" title="数组去重排序"></a>数组去重排序</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">12</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">7</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// case1</span></span><br><span class="line"><span class="comment">// let setArr = new Set(arr)</span></span><br><span class="line"><span class="comment">// const newArr = Array.from(setArr).sort((a, b) =&gt; &#123;</span></span><br><span class="line"><span class="comment">//   return a - b</span></span><br><span class="line"><span class="comment">// &#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// case2</span></span><br><span class="line"><span class="keyword">let</span> newArr = []</span><br><span class="line">arr.<span class="title function_">map</span>(<span class="function"><span class="params">i</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> res = newArr.<span class="title function_">indexOf</span>(i)</span><br><span class="line">  <span class="keyword">if</span> (res == -<span class="number">1</span>) &#123;</span><br><span class="line">    newArr.<span class="title function_">push</span>(i)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">newArr = newArr.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> a - b</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(newArr)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="双问号语法"><a href="#双问号语法" class="headerlink" title="?? 双问号语法"></a>?? 双问号语法</h3><ul>
+<li>只会判断左边的值是否是 undefined 或者 null， 如果是则读右边的值</li>
+</ul>
+<hr>
+<h3 id="使用-ElementePlus-鼠标悬浮-TS-没提示"><a href="#使用-ElementePlus-鼠标悬浮-TS-没提示" class="headerlink" title="使用 ElementePlus 鼠标悬浮 TS 没提示"></a>使用 ElementePlus 鼠标悬浮 TS 没提示</h3><ul>
+<li>去 ts 配置文件配置 “types”: [”element-plus&#x2F;global”]</li>
+</ul>
+<hr>
+<h3 id="像素转换-vh、vw"><a href="#像素转换-vh、vw" class="headerlink" title="像素转换 vh、vw"></a>像素转换 vh、vw</h3><ul>
+<li>安装 postcss-px-to-viewport 插件可以把 px 转成 vh 和 vw</li>
+</ul>
+<hr>
+<h3 id="把-proxy-对象转换成原始对象"><a href="#把-proxy-对象转换成原始对象" class="headerlink" title="把 proxy 对象转换成原始对象"></a>把 proxy 对象转换成原始对象</h3><p>处理后端返回的数据碰到了</p>
+<ul>
+<li>通过 toRaw() 方法可以</li>
+</ul>
+<hr>
+<h3 id="路由拼接传值后面的参数丢失"><a href="#路由拼接传值后面的参数丢失" class="headerlink" title="路由拼接传值后面的参数丢失"></a>路由拼接传值后面的参数丢失</h3><p>通过路由拼接传值时因为最后一个参数是地址，导致地址后面的参数丢失，原因是因为解析把后面的参数都当成了是地址的一部分</p>
+<ul>
+<li>给地址参数包上 encodeURIComponent 加密使用</li>
+</ul>
+<hr>
+<h3 id="小程序实现组件通信"><a href="#小程序实现组件通信" class="headerlink" title="小程序实现组件通信"></a>小程序实现组件通信</h3><ul>
+<li>properties &#x2F; triggerEvent 对应 props &#x2F; emit</li>
+</ul>
+<hr>
+<h3 id="快手小程序遇到插槽渲染冲突的问题"><a href="#快手小程序遇到插槽渲染冲突的问题" class="headerlink" title="快手小程序遇到插槽渲染冲突的问题"></a>快手小程序遇到插槽渲染冲突的问题</h3><ul>
+<li>解决办法更换图片地址，竟然好了，具体原因没时间细查</li>
+</ul>
+<hr>
+<h3 id="VS-Code-安装完依赖，代码还是报红"><a href="#VS-Code-安装完依赖，代码还是报红" class="headerlink" title="VS Code 安装完依赖，代码还是报红"></a>VS Code 安装完依赖，代码还是报红</h3><ul>
+<li>可以试着重启扩展宿主，ctrl + shift + P , 输入 developer ，选择重启扩展宿主</li>
+</ul>
+<hr>
+<h3 id="快手小程序-css-背景图"><a href="#快手小程序-css-背景图" class="headerlink" title="快手小程序 css 背景图"></a>快手小程序 css 背景图</h3><ul>
+<li>无法使用 getImageInfo API 编译后的图片链接，只能使用网络地址</li>
+</ul>
+<hr>
+<h3 id="如果配置完路径别名后-ts-报红"><a href="#如果配置完路径别名后-ts-报红" class="headerlink" title="如果配置完路径别名后 ts 报红"></a>如果配置完路径别名后 ts 报红</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果ts报红或缺少@types/node，需要再安装一下</span></span><br><span class="line">yarn add @types/node -D</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改 tsconfig</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="string">&quot;baseUrl&quot;</span>: <span class="string">&quot;.&quot;</span></span><br><span class="line">    <span class="string">&quot;paths&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;@/*&quot;</span>: [<span class="string">&quot;src/*&quot;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 修改完 vite.config.ts 文件需要重启</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Git-报错-OpenSSL-SSL-read"><a href="#Git-报错-OpenSSL-SSL-read" class="headerlink" title="Git 报错 OpenSSL SSL_read"></a>Git 报错 OpenSSL SSL_read</h3><p>fatal: unable to access ‘<a target="_blank" rel="noopener" href="https://github.com/.......%E2%80%98">https://github.com/.......‘</a>: OpenSSL SSL_read: Connection was reset</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">产生原因：一般是这是因为服务器的SSL证书没有经过第三方机构的签署，所以才报错</span><br><span class="line"></span><br><span class="line">解除ssl验证后，再次git</span><br><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br><span class="line"></span><br><span class="line">或者尝试清除缓存</span><br><span class="line">ipconfig /flushdns</span><br><span class="line"></span><br><span class="line">修改上传大小上线为 500M</span><br><span class="line">git config http.postBuffer 5242880003</span><br><span class="line"></span><br><span class="line">多数情况下国内访问 Github 会被…，或因网络波动问题推送失败，不行多试几次。</span><br><span class="line">推荐使用 SSH 方式拉去代码或者参考 开源项目 修改本机 hosts 文件解决访问问题</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="vite-初始化时红线-vue-未声明"><a href="#vite-初始化时红线-vue-未声明" class="headerlink" title="vite 初始化时红线 vue 未声明"></a>vite 初始化时红线 vue 未声明</h3><ul>
+<li>是没有@types&#x2F;node 声明文件包产生的问题</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 安装 @types/node文件包：</span></span><br><span class="line">npm install @types/node -D</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 tsconfig.json 配置：</span></span><br><span class="line"><span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;types&quot;</span>: [</span><br><span class="line">      <span class="string">&quot;node&quot;</span></span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="本地使用-http-server-服务-hs-指令报错"><a href="#本地使用-http-server-服务-hs-指令报错" class="headerlink" title="本地使用 http-server 服务 hs 指令报错"></a>本地使用 http-server 服务 hs 指令报错</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 报错</span><br><span class="line">hs -p 1001</span><br><span class="line"></span><br><span class="line">// 改用</span><br><span class="line">http-server -p 1001 -o</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="使用-mantine-UI-库的坑"><a href="#使用-mantine-UI-库的坑" class="headerlink" title="使用 mantine UI 库的坑"></a>使用 mantine UI 库的坑</h3><ul>
+<li>和 tailwind 冲突，导致 button 组件无底色，需要手动加背景色</li>
+<li>不能使用 div 和 p 标签了，会导致无法使用明暗主题，引入 box 组件代替 div</li>
+</ul>
+<hr>
+<h3 id="判断当前系统颜色主题"><a href="#判断当前系统颜色主题" class="headerlink" title="判断当前系统颜色主题"></a>判断当前系统颜色主题</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isSystemTheme = <span class="variable language_">window</span>.<span class="title function_">matchMedia</span>(<span class="string">&quot;(prefers-color-scheme: dark)&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (isSystemTheme.<span class="property">matches</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;当前系统是 dark&quot;</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;当前系统是 light&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/RuanChon">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://raunchon.notion.site/raunchon/Notes-84c2157567434d2583b75fee871d0bee">我的笔记</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="RuanChon/giscus_store"
+    data-repo-id="R_kgDOKI2UOA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOKI2UOM4CYtRS"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+
+</html>

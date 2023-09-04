@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Ruanchon的博客">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Ruanchon的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        redux中的thunk实现 - RuanChon&#39;Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 生活不再风花月，而是碗里酱醋盐 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/joe-ava.jpeg" />
+        </div>
+        <div class="name">
+            <i>RuanChon</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 生活不再风花月，而是碗里酱醋盐 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        redux中的thunk实现
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2023-08-07 15:15:47</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#技术摸索" title="技术摸索">技术摸索</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>学习 redux 的过程中了解到处理异步也需要在 dispatch 之前，就像 vuex 的 mutations 和 actions 一样，所以到底是谁借鉴谁啊 😂</p>
+<p>因为 dispatch 一执行就会立马执行 reducer ，而 redux 是不能在 reducer 里产生异步的，也就意味着异步操作一定要在 reducer 触发前执行完，像 vuex 通过 actions 处理完异步再执行 mutaions 一样，我们也需要一个 actions 来做事，所以就需要中间件登场了</p>
+<p>其中 redux-thunk 应该是用的最多的了，还有一个 redux-saga 听说更高级但是上手门槛也比较高，两个 npm 下载量不是一个等级，所以先由简入繁从 redux-thunk 上手</p>
+<p>因为执行实际的关系，当我们触发 dispatch 的时候会先经过中间件的增强然后 next 到 reducer，所以我搂了一眼 redux-thunk 的源码，大概了解了基本实现，以下是我自己手写的一个简版 redux-thunk 的源码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; legacy_createStore, applyMiddleware &#125; <span class="keyword">from</span> <span class="string">&quot;redux&quot;</span></span><br><span class="line"><span class="keyword">import</span> &#123; reducer &#125; <span class="keyword">from</span> <span class="string">&quot;./reducers&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 简版 redux-thunk 的源码</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">thunkMiddleware</span> = config =&gt; <span class="function"><span class="params">store</span> =&gt;</span> <span class="function"><span class="params">next</span> =&gt;</span> <span class="function"><span class="params">action</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// config 是 thunkMiddleware 的配置对象 key 值</span></span><br><span class="line">  <span class="comment">// store 是 redux 的 store 对象，但是只有 getState 和 dispatch 方法</span></span><br><span class="line">  <span class="comment">// next 是 redux 的 dispatch 方法，洋葱模型</span></span><br><span class="line">  <span class="comment">// action 是 dispatch 的参数，action 对象</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 类型筛选，只有传过来的 action.type 和 thunkMiddleware 的配置对象 key 值相等才会执行</span></span><br><span class="line">  <span class="keyword">const</span> matchAsyncRender = config[action.<span class="property">type</span>]</span><br><span class="line">  <span class="keyword">if</span> (matchAsyncRender) <span class="title function_">matchAsyncRender</span>(store.<span class="property">dispatch</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在上面处理好了异步渲染的逻辑，然后再执行 dispatch</span></span><br><span class="line">  <span class="title function_">next</span>(action)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// thunk 的使用</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> store = <span class="title function_">legacy_createStore</span>(</span><br><span class="line">  reducer,</span><br><span class="line">  <span class="title function_">applyMiddleware</span>(</span><br><span class="line">    <span class="title function_">thunkMiddleware</span>(&#123;</span><br><span class="line">      <span class="attr">async_increment</span>: <span class="function"><span class="params">dispatch</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">          <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;数据dispatch来了&quot;</span>, dispatch)</span><br><span class="line">          <span class="title function_">dispatch</span>(&#123; <span class="attr">type</span>: <span class="string">&quot;INCREMENT&quot;</span> &#125;)</span><br><span class="line">        &#125;, <span class="number">2000</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/RuanChon">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://raunchon.notion.site/raunchon/Notes-84c2157567434d2583b75fee871d0bee">我的笔记</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="RuanChon/giscus_store"
+    data-repo-id="R_kgDOKI2UOA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOKI2UOM4CYtRS"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+
+</html>
